@@ -63,7 +63,7 @@ class _CartItemCardState extends State<CartItemCard> {
                     foregroundImage: AssetImage(widget.cartItem.mealImage),
                   ),
                   SizedBox(
-                    width: 25,
+                    width: 20,
                   ),
                   Expanded(
                     child: Column(
