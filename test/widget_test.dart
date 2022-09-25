@@ -5,15 +5,38 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:restaurant/data/localservices/cache_local_services.dart';
+import 'package:restaurant/firebase_options.dart';
+import 'package:restaurant/view/screens/home_screen.dart';
+import 'package:restaurant/view/screens/login_screen.dart';
 
-import 'package:restaurant/main.dart';
+import '../lib/main.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    Widget pushNext;
+    SharedCache.cacheInit();
+    String uid = SharedCache.getLastLoggedIn('lastUser') ?? '';
+    if (uid != '') {
+      pushNext = LoginPage();
+    } else {
+      pushNext = HomeScreen();
+    }
+
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    runApp(MyApp(
+      pushNext: pushNext,
+    ));
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(MyApp(
+      pushNext: pushNext,
+    ));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
