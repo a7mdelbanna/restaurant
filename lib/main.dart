@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:restaurant/data/localservices/cache_local_services.dart';
 import 'package:restaurant/data/webservices/auth_web_services.dart';
+import 'package:restaurant/view/screens/bonus_screen.dart';
 import 'package:restaurant/view/screens/home_screen.dart';
 import 'package:restaurant/view/screens/login_screen.dart';
 import 'package:restaurant/view/screens/signup_screen.dart';
@@ -115,7 +116,7 @@ class MyApp extends StatelessWidget {
                   debugShowCheckedModeBanner: false,
                   title: 'Restaurant',
                   theme: CustomTheme.lightTheme,
-                  home: pushNext,
+                  home: BonusScreen(),
                 )));
   }
 }
